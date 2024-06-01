@@ -6,10 +6,15 @@
   :root {
     --background: #ffffff;
     --foreground: #09090b;
+
+    --border: #fcf4f0;
   }
 }
 
 @layer base {
+  * {
+    @apply border-border transition duration-300 ease-in-out;
+  }
   body {
     @apply bg-background text-foreground;
     font-family: "Raleway", sans-serif;
