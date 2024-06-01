@@ -4,6 +4,12 @@
     <h1 class="text-5xl font-bold">Taskly</h1>
     <h2 class="text-lg font-light">Managing your day</h2>
   </div>
+  <div class="m-auto mt-12 max-w-screen-md flex-col flex gap-3">
+    <app-task [task]="'Wake up'" [hour]="'6:00 AM'" />
+    <app-task [task]="'Morning yoga'" [hour]="'7:00 AM'" />
+    <app-task [task]="'Daily workout'" [hour]="'8:00 AM'" />
+    <app-task [task]="'Work'" [hour]="'9:00 AM'" />
+  </div>
 </main>
 
 <router-outlet />
