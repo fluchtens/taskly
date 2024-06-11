@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  client:
+    container_name: taskly-client
+    image: taskly-client
+    build:
+      context: ./client
+      dockerfile: dev.Dockerfile
+    ports:
+      - 4200:4200
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    networks:
+      - taskly_network
+    restart: always
+
+networks:
+  taskly_network:
+    name: taskly_network
