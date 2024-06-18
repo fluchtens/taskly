@@ -1,12 +1,48 @@
 version: "3"
 
 services:
+  database:
+    container_name: taskly-db
+    image: mysql:latest
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - database:/var/lib/mysql
+    ports:
+      - 3306:3306
+    networks:
+      - taskly_network
+    restart: always
+
+  phpmyadmin:
+    container_name: taskly-phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    depends_on:
+      - database
+    deploy:
+      restart_policy:
+        condition: on-failure
+        max_attempts: 10
+    environment:
+      PMA_ARBITRARY: ${PMA_ARBITRARY}
+      PMA_HOST: ${PMA_HOST}
+    ports:
+      - 5050:80
+    networks:
+      - taskly_network
+    restart: always
+
   client:
     container_name: taskly-client
     image: taskly-client
     build:
       context: ./client
       dockerfile: dev.Dockerfile
+    depends_on:
+      - database
     ports:
       - 4200:4200
     volumes:
@@ -19,3 +55,6 @@ services:
 networks:
   taskly_network:
     name: taskly_network
+
+volumes:
+  database:

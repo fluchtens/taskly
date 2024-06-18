@@ -1,10 +1,10 @@
-package com.fluchtens.taskly;
+package com.fluchtens.stats;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TasklyApplicationTests {
+class StatsApplicationTests {
 
 	@Test
 	void contextLoads() {
