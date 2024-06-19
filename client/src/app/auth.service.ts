@@ -5,12 +5,14 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class LoginBtnService {
-  private apiUrl = 'http://localhost:8080';
-
+export class AuthService {
   constructor(private http: HttpClient) {}
 
-  getData(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+  private apiUrl = 'http://localhost:8080';
+
+  getUserInfo(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/user/me`, {
+      withCredentials: true,
+    });
   }
 }

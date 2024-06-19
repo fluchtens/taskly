@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 import com.fluchtens.stats.models.User;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
-    User findByUsername(String username);
-}
+public interface UserRepository extends JpaRepository<User, Integer> {}

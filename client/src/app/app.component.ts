@@ -9,6 +9,4 @@ import { TaskComponent } from './task/task.component';
   imports: [RouterOutlet, HeaderComponent, TaskComponent],
   templateUrl: './app.component.html',
 })
-export class AppComponent {
-  title = 'taskly';
-}
+export class AppComponent {}
