@@ -14,22 +14,9 @@ export class HeaderComponent {
 
   user: User | null = null;
 
-  logout() {
-    this.authService.logout().subscribe({
-      next: (data) => {
-        console.log('cacaa');
-        this.user = data;
-      },
-      error: (error) => {
-        console.log(error);
-      },
-    });
-  }
-
   ngOnInit() {
     this.authService.getUserInfo().subscribe({
       next: (data) => {
-        // console.log(data);
         this.user = data;
       },
       error: (error) => {
@@ -41,5 +28,16 @@ export class HeaderComponent {
   handleLogin() {
     const apiUrl = 'http://127.0.0.1:8080/oauth2/authorization/github';
     window.location.href = apiUrl;
+  }
+
+  handleLogout() {
+    this.authService.logout().subscribe({
+      next: () => {
+        this.user = null;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
   }
 }
