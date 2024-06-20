@@ -14,10 +14,22 @@ export class HeaderComponent {
 
   user: User | null = null;
 
+  logout() {
+    this.authService.logout().subscribe({
+      next: (data) => {
+        console.log('cacaa');
+        this.user = data;
+      },
+      error: (error) => {
+        console.log(error);
+      },
+    });
+  }
+
   ngOnInit() {
     this.authService.getUserInfo().subscribe({
       next: (data) => {
-        console.log(data);
+        // console.log(data);
         this.user = data;
       },
       error: (error) => {

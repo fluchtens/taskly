@@ -7,7 +7,9 @@
       </button>
     </ng-container>
     <ng-container *ngIf="user">
-      <button class="px-3 py-2 text-sm font-medium">{{ user.login }}</button>
+      <button (click)="logout()" class="px-3 py-2 text-sm font-medium">
+        {{ user.login }}
+      </button>
     </ng-container>
   </div>
 </header>
