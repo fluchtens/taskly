@@ -21,7 +21,7 @@ export class AuthService {
       `${this.apiUrl}/logout`,
       {},
       {
-        withCredentials: true, // Assurez-vous que les cookies sont envoyés avec la requête
+        withCredentials: true,
       }
     );
   }
