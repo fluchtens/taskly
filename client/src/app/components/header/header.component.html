@@ -7,11 +7,16 @@
       </button>
     </div>
     <div *ngIf="user" class="relative">
-      <button (click)="toggleProfileMenu()" class="w-10 h-10">
+      <button
+        (click)="toggleProfileMenu()"
+        id="profile-menu-btn"
+        class="w-10 h-10"
+      >
         <img src="{{ user.avatar }}" alt="user.avatar" class="rounded-full" />
       </button>
       <div
         *ngIf="showProfileMenu"
+        id="profile-menu"
         class="absolute right-0 p-1 w-36 bg-background rounded-md border shadow-lg"
       >
         <a

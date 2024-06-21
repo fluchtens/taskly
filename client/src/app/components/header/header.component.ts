@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { User } from '../../interfaces/user.interface';
 import { AuthService } from '../../services/auth.service';
 
@@ -15,10 +15,6 @@ export class HeaderComponent {
   user: User | null = null;
   showProfileMenu = false;
 
-  toggleProfileMenu() {
-    this.showProfileMenu = !this.showProfileMenu;
-  }
-
   ngOnInit() {
     this.authService.getUserInfo().subscribe({
       next: (data) => {
@@ -28,6 +24,26 @@ export class HeaderComponent {
         console.log(error);
       },
     });
+  }
+
+  toggleProfileMenu() {
+    this.showProfileMenu = !this.showProfileMenu;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const button = document.getElementById('profile-menu-btn');
+    const menu = document.getElementById('profile-menu');
+
+    if (!button || !menu) {
+      return;
+    }
+
+    if (!button.contains(target) && !menu.contains(target)) {
+      this.showProfileMenu = false;
+      console.log('click outside');
+    }
   }
 
   handleLogin() {
