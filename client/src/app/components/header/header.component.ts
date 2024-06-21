@@ -42,7 +42,6 @@ export class HeaderComponent {
 
     if (!button.contains(target) && !menu.contains(target)) {
       this.showProfileMenu = false;
-      console.log('click outside');
     }
   }
 

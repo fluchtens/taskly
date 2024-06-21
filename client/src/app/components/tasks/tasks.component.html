@@ -1,0 +1,9 @@
+<div class="m-auto mt-12 max-w-screen-md">
+  <app-task-creator />
+  <div class="mt-6 flex-col flex gap-3">
+    <app-task [task]="'Wake up'" [hour]="'6:00 AM'" [completed]="true" />
+    <app-task [task]="'Morning yoga'" [hour]="'7:00 AM'" [completed]="true" />
+    <app-task [task]="'Daily workout'" [hour]="'8:00 AM'" [completed]="false" />
+    <app-task [task]="'Work'" [hour]="'9:00 AM'" [completed]="false" />
+  </div>
+</div>

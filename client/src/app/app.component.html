@@ -1,18 +1,10 @@
 <app-header />
-<main class="m-auto max-w-screen-lg">
+<main class="m-auto p-4 max-w-screen-lg">
   <div class="mt-10 flex-col flex justify-center items-center gap-1">
     <h1 class="text-5xl font-bold">Taskly</h1>
     <h2 class="text-lg font-light">Managing your day</h2>
   </div>
-  <div class="m-auto mt-12 max-w-screen-md">
-    <button class="px-3 rounded bg-[#FEE4D5] text-4xl font-light">+</button>
-  </div>
-  <div class="m-auto mt-6 max-w-screen-md flex-col flex gap-3">
-    <app-task [task]="'Wake up'" [hour]="'6:00 AM'" [completed]="true" />
-    <app-task [task]="'Morning yoga'" [hour]="'7:00 AM'" [completed]="true" />
-    <app-task [task]="'Daily workout'" [hour]="'8:00 AM'" [completed]="false" />
-    <app-task [task]="'Work'" [hour]="'9:00 AM'" [completed]="false" />
-  </div>
+  <app-tasks />
 </main>
 
 <router-outlet />

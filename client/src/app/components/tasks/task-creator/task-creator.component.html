@@ -1,0 +1,63 @@
+<button
+  (click)="toggleModal()"
+  class="px-3 bg-background hover:bg-accent rounded-full border text-3xl font-thin"
+>
+  +
+</button>
+<div
+  *ngIf="showModal"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/80"
+>
+  <form
+    id="task-creator-form"
+    class="p-4 max-w-screen-md w-full bg-background rounded-lg"
+    (ngSubmit)="createTask()"
+  >
+    <h2 class="text-lg font-semibold">Add a new task</h2>
+    <p class="mt-1 text-sm text-muted-foreground">
+      Add a new task for the day.
+    </p>
+    <div class="mt-4 flex-col flex gap-3">
+      <div>
+        <label class="text-sm font-medium text-muted-foreground"
+          >Description</label
+        >
+        <input
+          name="taskDescription"
+          type="text"
+          placeholder="Description"
+          [(ngModel)]="taskDescription"
+          class="mt-1 px-3 py-2 w-full border rounded-lg shadow-sm text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+          required
+        />
+      </div>
+      <div>
+        <label class="text-sm font-medium text-muted-foreground"
+          >Execution time</label
+        >
+        <input
+          name="taskExecutionTime"
+          type="time"
+          [(ngModel)]="taskExecutionTime"
+          class="mt-1 px-3 py-2 w-full border rounded-lg shadow-sm text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+          required
+        />
+      </div>
+    </div>
+    <div class="mt-6 flex justify-end items-center gap-2">
+      <button
+        type="button"
+        (click)="closeModal()"
+        class="px-4 py-2 bg-muted border rounded-md text-sm font-normal text-muted-foreground"
+      >
+        Cancel
+      </button>
+      <button
+        type="submit"
+        class="px-4 py-2 bg-primary rounded-md text-sm font-medium text-primary-foreground"
+      >
+        Create
+      </button>
+    </div>
+  </form>
+</div>
