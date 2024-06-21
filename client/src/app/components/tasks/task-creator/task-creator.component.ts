@@ -17,6 +17,13 @@ export class TaskCreatorComponent {
   taskExecutionTime: string = '';
   errorMessage: string = '';
 
+  resetProperties() {
+    this.showModal = false;
+    this.taskDescription = '';
+    this.taskExecutionTime = '';
+    this.errorMessage = '';
+  }
+
   toggleModal() {
     this.showModal = !this.showModal;
   }
@@ -31,15 +38,13 @@ export class TaskCreatorComponent {
     const form = document.getElementById('task-creator-form');
 
     if (form && !form.contains(target)) {
-      this.showModal = false;
-      this.taskDescription = '';
-      this.taskExecutionTime = '';
-      this.errorMessage = '';
+      this.resetProperties();
     }
   }
 
   createTask() {
     if (!this.taskDescription || !this.taskExecutionTime) {
+      this.errorMessage = 'Please fill out all fields';
       return;
     }
 
@@ -49,9 +54,13 @@ export class TaskCreatorComponent {
         next: (data) => {
           console.log('next', data);
           this.closeModal();
+          this.resetProperties();
         },
         error: (error) => {
-          console.log('error', error);
+          const keys = Object.keys(error.error);
+          const firstKey = keys[0];
+          const firstValue = error.error[firstKey];
+          this.errorMessage = firstValue;
         },
       });
   }
