@@ -52,7 +52,7 @@ export class TaskCreatorComponent {
       .createTask(this.taskDescription, this.taskExecutionTime)
       .subscribe({
         next: (data) => {
-          console.log('next', data);
+          // console.log('next', data);
           this.closeModal();
           this.resetProperties();
         },

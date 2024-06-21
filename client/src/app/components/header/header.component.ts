@@ -1,7 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { User } from '../../interfaces/user.interface';
 import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -10,20 +12,25 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
-  constructor(private authService: AuthService) {}
-
-  user: User | null = null;
+  private userSubscription: Subscription | undefined;
+  user: User | null | undefined = undefined;
   showProfileMenu = false;
 
-  ngOnInit() {
-    this.authService.getUserInfo().subscribe({
-      next: (data) => {
-        this.user = data;
-      },
-      error: (error) => {
-        console.log(error);
-      },
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
+
+  ngOnInit(): void {
+    this.userSubscription = this.userService.getUser().subscribe((user) => {
+      this.user = user;
     });
+  }
+
+  ngOnDestroy(): void {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
 
   toggleProfileMenu() {
@@ -53,11 +60,9 @@ export class HeaderComponent {
   handleLogout() {
     this.authService.logout().subscribe({
       next: () => {
-        this.user = null;
+        this.userService.setUser(null);
       },
-      error: (error) => {
-        console.log(error);
-      },
+      error: (error) => {},
     });
   }
 }

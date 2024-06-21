@@ -4,7 +4,9 @@
     <h1 class="text-5xl font-bold">Taskly</h1>
     <h2 class="text-lg font-light">Managing your day</h2>
   </div>
-  <app-tasks />
+  <div *ngIf="user">
+    <app-tasks />
+  </div>
 </main>
 
 <router-outlet />
