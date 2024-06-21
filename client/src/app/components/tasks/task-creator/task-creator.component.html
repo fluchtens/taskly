@@ -17,7 +17,13 @@
     <p class="mt-1 text-sm text-muted-foreground">
       Add a new task for the day.
     </p>
-    <div class="mt-4 flex-col flex gap-3">
+    <div
+      *ngIf="errorMessage"
+      class="mt-3 px-3 py-2 bg-[#ffebe8] border rounded border-[#ffc1bf]"
+    >
+      <p class="text-sm">{{ errorMessage }}</p>
+    </div>
+    <div class="mt-2 flex-col flex gap-3">
       <div>
         <label class="text-sm font-medium text-muted-foreground"
           >Description</label
