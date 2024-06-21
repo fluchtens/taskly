@@ -4,9 +4,10 @@
 
 @layer base {
   :root {
-    --background: #ffffff;
-    --foreground: #09090b;
-    --border: #fcf4f0;
+    --background: 0 0% 100%;
+    --foreground: 20 14.3% 4.1%;
+    --border: 20 5.9% 90%;
+    --accent: 60 4.8% 95.9%;
   }
 }
 

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { User } from '../interfaces/user.interface';
+import { User } from '../../interfaces/user.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +13,11 @@ export class HeaderComponent {
   constructor(private authService: AuthService) {}
 
   user: User | null = null;
+  showProfileMenu = false;
+
+  toggleProfileMenu() {
+    this.showProfileMenu = !this.showProfileMenu;
+  }
 
   ngOnInit() {
     this.authService.getUserInfo().subscribe({
@@ -26,7 +31,7 @@ export class HeaderComponent {
   }
 
   handleLogin() {
-    const apiUrl = 'http://127.0.0.1:8080/oauth2/authorization/github';
+    const apiUrl = 'http://localhost:8080/oauth2/authorization/github';
     window.location.href = apiUrl;
   }
 
