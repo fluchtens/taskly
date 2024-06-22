@@ -1,5 +1,6 @@
 package com.fluchtens.stats.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,14 @@ public class TaskService {
 
     @Autowired
     private UserRepository userRepository;
+
+    public ResponseEntity<List<Task>> getAllTasks() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        int userId = Integer.parseInt(auth.getName());
+        User user = userRepository.findById(userId).get();
+        List<Task> tasks = this.taskRepository.findByUser(user);
+        return new ResponseEntity<>(tasks, HttpStatus.OK);
+    }
 
     public ResponseEntity<JsonResponse> createTask(Task task) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

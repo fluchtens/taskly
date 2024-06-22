@@ -8,6 +8,7 @@ import { Component, Input } from '@angular/core';
   templateUrl: './task.component.html',
 })
 export class TaskComponent {
+  @Input({ required: true }) id: number = 0;
   @Input({ required: true }) task: string = '';
   @Input({ required: true }) hour: string = '';
   @Input({ required: true }) completed: boolean = false;
