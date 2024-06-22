@@ -1,11 +1,11 @@
 <div class="m-auto mt-12 max-w-screen-md">
   <app-task-creator />
-  <div *ngFor="let task of tasks" class="mt-6 flex-col flex gap-3">
+  <div *ngFor="let task of tasks" class="mt-3 flex-col flex">
     <app-task
       [id]="task.id"
       [task]="task.description"
       [hour]="task.executionTime"
-      [completed]="false"
+      [completed]="task.completed"
     />
   </div>
 </div>

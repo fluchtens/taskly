@@ -60,4 +60,26 @@ public class TaskService {
         JsonResponse response = new JsonResponse("Task created successfully");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    public ResponseEntity<JsonResponse> updateTaskStatus(int id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        int userId = Integer.parseInt(auth.getName());
+
+        Optional<Task> optionalTask = this.taskRepository.findById(id);
+        if (!optionalTask.isPresent()) {
+            JsonResponse response = new JsonResponse("Task not found");
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }
+
+        Task task = optionalTask.get();
+        if (task.getUser().getId() != userId) {
+            JsonResponse response = new JsonResponse("You are not authorized to update this task");
+            return new ResponseEntity<>(response, HttpStatus.FORBIDDEN);
+        }
+        task.setCompleted(!task.getCompleted());
+        this.taskRepository.save(task);
+
+        JsonResponse response = new JsonResponse("Task updated successfully");
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

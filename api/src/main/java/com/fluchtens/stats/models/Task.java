@@ -25,6 +25,9 @@ public class Task {
     @Column(nullable = false)
     private String executionTime;
 
+    @Column(nullable = false)
+    private boolean completed = false;
+
     @ManyToOne()
     @JoinColumn(nullable = false)
     private User user;
@@ -51,6 +54,14 @@ public class Task {
 
     public void setExecutionTime(String executionTime) {
         this.executionTime = executionTime;
+    }
+
+    public boolean getCompleted() {
+        return this.completed;
+    }
+
+    public void setCompleted(boolean completed) {
+        this.completed = completed;
     }
 
     public User getUser() {

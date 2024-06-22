@@ -1,5 +1,14 @@
 <div class="flex items-center gap-4">
-  <div class="w-3 h-3 border border-primary rounded-full"></div>
+  <button
+    (click)="updateTaskStatus()"
+    *ngIf="completed"
+    class="w-3 h-3 bg-primary rounded-full"
+  ></button>
+  <button
+    (click)="updateTaskStatus()"
+    *ngIf="!completed"
+    class="w-3 h-3 bg-background border border-primary rounded-full"
+  ></button>
   <div
     [ngClass]="completed ? 'bg-[#fcbc90]' : 'bg-secondary'"
     class="px-8 py-6 w-full flex justify-between items-center rounded-lg border shadow-sm"
