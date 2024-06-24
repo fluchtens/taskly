@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { TaskService } from '../../../services/task/task.service';
 import { TaskCreatorService } from './task-creator.service';
 
 @Component({
@@ -10,7 +11,10 @@ import { TaskCreatorService } from './task-creator.service';
   templateUrl: './task-creator.component.html',
 })
 export class TaskCreatorComponent {
-  constructor(private taskCreatorService: TaskCreatorService) {}
+  constructor(
+    private taskService: TaskService,
+    private taskCreatorService: TaskCreatorService
+  ) {}
 
   showModal = false;
   taskDescription: string = '';
@@ -51,8 +55,8 @@ export class TaskCreatorComponent {
     this.taskCreatorService
       .createTask(this.taskDescription, this.taskExecutionTime)
       .subscribe({
-        next: (data) => {
-          // console.log('next', data);
+        next: () => {
+          this.taskService.updateTasks();
           this.closeModal();
           this.resetProperties();
         },

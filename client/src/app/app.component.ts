@@ -6,6 +6,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { User } from './interfaces/user.interface';
 import { AuthService } from './services/auth/auth.service';
+import { TaskService } from './services/task/task.service';
 import { UserService } from './services/user/user.service';
 
 @Component({
@@ -17,7 +18,8 @@ import { UserService } from './services/user/user.service';
 export class AppComponent {
   constructor(
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private taskService: TaskService
   ) {}
 
   title = 'taskly';
@@ -26,19 +28,19 @@ export class AppComponent {
 
   ngOnInit() {
     this.authService.getUserInfo().subscribe({
-      next: (data) => {
-        this.userService.setUser(data);
+      next: (user) => {
+        this.userService.setUser(user);
       },
       error: () => {
         this.userService.setUser(null);
       },
     });
 
+    this.taskService.updateTasks();
+
     this.userSubscription = this.userService.getUser().subscribe((user) => {
       this.user = user;
     });
-
-    console.log('test', process.env['API_URL']);
   }
 
   ngOnDestroy(): void {
