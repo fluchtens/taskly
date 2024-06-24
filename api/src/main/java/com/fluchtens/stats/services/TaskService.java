@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -28,7 +29,8 @@ public class TaskService {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         int userId = Integer.parseInt(auth.getName());
         User user = userRepository.findById(userId).get();
-        List<Task> tasks = this.taskRepository.findByUser(user);
+        Sort sortByExecutionTime = Sort.by(Sort.Direction.ASC, "executionTime");
+        List<Task> tasks = this.taskRepository.findByUser(user, sortByExecutionTime);
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
