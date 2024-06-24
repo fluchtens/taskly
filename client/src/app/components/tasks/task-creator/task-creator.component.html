@@ -1,11 +1,9 @@
-<div class="flex justify-end">
-  <button
-    (click)="toggleModal()"
-    class="px-3 bg-background hover:bg-accent rounded-full border text-3xl font-thin"
-  >
-    +
-  </button>
-</div>
+<button
+  (click)="toggleModal()"
+  class="px-3 bg-background hover:bg-accent rounded-full border text-3xl font-thin"
+>
+  +
+</button>
 <div
   *ngIf="showModal"
   class="fixed inset-0 z-50 flex items-center justify-center bg-black/80"

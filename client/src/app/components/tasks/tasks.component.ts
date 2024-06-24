@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Task } from '../../interfaces/task.interface';
@@ -15,10 +15,16 @@ import { TaskComponent } from './task/task.component';
 export class TasksComponent {
   private taskSubscription: Subscription | undefined = undefined;
   public tasks: Task[] | null | undefined = undefined;
+  public formattedDate: string | null = null;
 
-  constructor(private taskService: TaskService) {}
+  constructor(private taskService: TaskService, private datePipe: DatePipe) {
+    this.formattedDate = '';
+  }
 
   ngOnInit() {
+    const today = new Date();
+    this.formattedDate = this.datePipe.transform(today, 'EEEE d', 'en-US');
+
     this.taskSubscription = this.taskService.getTasks().subscribe((tasks) => {
       this.tasks = tasks;
     });
