@@ -29,7 +29,6 @@ public class SecurityConfig {
 				.defaultSuccessUrl("http://localhost:4200", true)
 			)
 			.logout((logout) -> logout
-				.deleteCookies("JSESSIONID")
 				.logoutSuccessHandler((request, response, authentication) -> {
                     response.setStatus(HttpServletResponse.SC_OK);
                 })

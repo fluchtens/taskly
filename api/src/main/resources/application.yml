@@ -10,6 +10,13 @@ spring:
       ddl-auto: update
     open-in-view: false
 
+  session:
+    jdbc:
+      initialize-schema: always
+      schema: classpath:org/springframework/session/jdbc/schema-@@platform@@.sql
+      table-name: SPRING_SESSION
+      cleanup-cron: "0 0 * * * *"
+
   security:
     oauth2:
       client:
@@ -17,3 +24,8 @@ spring:
           github:
             client-id: Ov23liDmXLJJO5DZf7A5
             client-secret: fb0b8875b43782496908bdcccf38d75ca28a4bae
+
+server:
+  servlet:
+    session:
+      timeout: 2h
