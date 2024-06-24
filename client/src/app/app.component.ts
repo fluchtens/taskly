@@ -5,8 +5,8 @@ import { Subscription } from 'rxjs';
 import { HeaderComponent } from './components/header/header.component';
 import { TasksComponent } from './components/tasks/tasks.component';
 import { User } from './interfaces/user.interface';
-import { AuthService } from './services/auth.service';
-import { UserService } from './services/user.service';
+import { AuthService } from './services/auth/auth.service';
+import { UserService } from './services/user/user.service';
 
 @Component({
   selector: 'app-root',
@@ -37,6 +37,8 @@ export class AppComponent {
     this.userSubscription = this.userService.getUser().subscribe((user) => {
       this.user = user;
     });
+
+    console.log('test', process.env['API_URL']);
   }
 
   ngOnDestroy(): void {
