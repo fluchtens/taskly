@@ -8,9 +8,6 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
-import org.springframework.security.web.authentication.logout.HeaderWriterLogoutHandler;
-import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter;
-import org.springframework.security.web.header.writers.ClearSiteDataHeaderWriter.Directive;
 
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -19,8 +16,6 @@ import jakarta.servlet.http.HttpServletResponse;
 public class SecurityConfig {
     @Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		HeaderWriterLogoutHandler clearSiteData = new HeaderWriterLogoutHandler(new ClearSiteDataHeaderWriter(Directive.COOKIES));
-
 		return http
 			.authorizeHttpRequests((requests) -> requests
 				.requestMatchers("/").permitAll()
@@ -34,14 +29,12 @@ public class SecurityConfig {
 				.defaultSuccessUrl("http://localhost:4200", true)
 			)
 			.logout((logout) -> logout
-				.permitAll()
-				.addLogoutHandler(clearSiteData)
+				.deleteCookies("JSESSIONID")
 				.logoutSuccessHandler((request, response, authentication) -> {
                     response.setStatus(HttpServletResponse.SC_OK);
                 })
 			)
 			.csrf(AbstractHttpConfigurer::disable)
 			.build();
-			
 	}
 }
