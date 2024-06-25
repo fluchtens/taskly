@@ -18,6 +18,7 @@ services:
   phpmyadmin:
     container_name: taskly-phpmyadmin
     image: phpmyadmin/phpmyadmin
+    platform: linux/amd64
     depends_on:
       - database
     environment:
