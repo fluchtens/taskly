@@ -1,4 +1,4 @@
-# ft_transcendence
+# taskly
 
 ### What's this about?
 Web application to manage your day in Java Spring Boot and Angular.
