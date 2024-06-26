@@ -22,8 +22,8 @@ spring:
       client:
         registration:
           github:
-            client-id: Ov23liDmXLJJO5DZf7A5
-            client-secret: fb0b8875b43782496908bdcccf38d75ca28a4bae
+            client-id: ${GITHUB_CLIENT_ID}
+            client-secret: ${GITHUB_CLIENT_SECRET}
 
 server:
   servlet:
