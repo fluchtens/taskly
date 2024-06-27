@@ -11,6 +11,9 @@ Web application to manage your day in Java Spring Boot and Angular.
 - Configure variables for url, api keys, database information, etc.
 - Set the MODE variable to dev or prod in the Makefile.
 ```env
+API_URL=http://localhost:8080
+CLIENT_URL=http://localhost:4200
+
 MYSQL_DATABASE=taskly
 MYSQL_ROOT_PASSWORD=42
 MYSQL_USER=fluchten
