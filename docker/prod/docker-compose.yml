@@ -33,10 +33,12 @@ services:
   api:
     container_name: taskly-api
     image: taskly-api
+    platform: linux/amd64
     build:
       context: ../../api
-      dockerfile: dev.Dockerfile
+      dockerfile: prod.Dockerfile
     environment:
+      CLIENT_URL: ${CLIENT_URL}
       DATABASE_URL: ${DATABASE_URL}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
@@ -46,8 +48,6 @@ services:
       - database
     ports:
       - 8080:8080
-    volumes:
-      - ../../api:/app
     networks:
       - taskly_network
     restart: always
@@ -58,8 +58,8 @@ services:
     build:
       context: ../../client
       dockerfile: prod.Dockerfile
-    # depends_on:
-    #   - api
+    depends_on:
+      - api
     ports:
       - 80:80
     networks:

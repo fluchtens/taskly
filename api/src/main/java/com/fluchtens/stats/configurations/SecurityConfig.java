@@ -1,5 +1,6 @@
 package com.fluchtens.stats.configurations;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,9 @@ import jakarta.servlet.http.HttpServletResponse;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+	@Value("${client-url}")
+    private String clientUrl;
+
     @Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		return http
@@ -26,7 +30,7 @@ public class SecurityConfig {
             )
 			.oauth2Login((oauth2) -> oauth2
 				.loginPage("/oauth2/authorization/github")
-				.defaultSuccessUrl("http://localhost:4200", true)
+				.defaultSuccessUrl(clientUrl, true)
 			)
 			.logout((logout) -> logout
 				.logoutSuccessHandler((request, response, authentication) -> {

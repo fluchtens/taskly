@@ -37,6 +37,7 @@ services:
       context: ../../api
       dockerfile: dev.Dockerfile
     environment:
+      CLIENT_URL: ${CLIENT_URL}
       DATABASE_URL: ${DATABASE_URL}
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
