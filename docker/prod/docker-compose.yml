@@ -58,8 +58,8 @@ services:
     build:
       context: ../../client
       dockerfile: prod.Dockerfile
-    # depends_on:
-    #   - api
+    depends_on:
+      - api
     ports:
       - 80:80
     networks:
