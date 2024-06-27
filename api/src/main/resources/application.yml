@@ -29,3 +29,5 @@ server:
   servlet:
     session:
       timeout: 2h
+
+client-url: ${CLIENT_URL}
